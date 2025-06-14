@@ -1,8 +1,6 @@
-Here’s a polished `README.md` file for your **JavaScript Symbol Data Type Guide**, complete with formatting, key insights, and examples. I've added an additional usage tip and improved formatting to make it more professional and helpful for readers.
 
----
 
-````markdown
+
 # 🧬 JavaScript `Symbol` Data Type – Quick Guide
 
 The `Symbol` is a **primitive data type** in JavaScript introduced in ES6, designed to create **unique and immutable identifiers**. It’s a powerful but often underutilized feature.

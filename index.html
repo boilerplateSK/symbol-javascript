@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Symbol Data Type</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 6px solid #007bff;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #28a745;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-title {
+            background: #4a5568;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            margin: -20px -20px 15px -20px;
+        }
+
+        .output {
+            background: #1a202c;
+            border: 2px solid #4a5568;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .output-label {
+            color: #ffc107;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .key-point {
+            background: linear-gradient(145deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .use-case {
+            background: linear-gradient(145deg, #d1ecf1, #bee5eb);
+            border: 2px solid #17a2b8;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .demo-button {
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            margin: 10px 5px;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+        }
+
+        .demo-output {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: #007bff;
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .warning {
+            background: linear-gradient(145deg, #f8d7da, #f5c6cb);
+            border: 2px solid #dc3545;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+
+        .tab {
+            background: #e9ecef;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: white;
+            color: #007bff;
+        }
+
+        .tab-content {
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 10px 10px;
+            border: 2px solid #f8f9fa;
+            border-top: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔑 JavaScript Symbol Data Type</h1>
+        
+        <div class="intro">
+            <h2>What is a Symbol?</h2>
+            <p><strong>Symbol</strong> is a primitive data type introduced in ES6 (2015). Every Symbol is <strong>unique</strong> and <strong>immutable</strong>, making it perfect for creating unique identifiers that won't conflict with other properties.</p>
+        </div>
+
+        <div class="section">
+            <h3>🔧 Basic Symbol Creation</h3>
+            <div class="code-block">
+                <div class="code-title">Creating Symbols</div>
+                // Creating symbols
+                const symbol1 = Symbol();
+                const symbol2 = Symbol();
+                const symbol3 = Symbol('description');
+                const symbol4 = Symbol('description');
+
+                console.log(symbol1);           // Symbol()
+                console.log(symbol3);           // Symbol(description)
+                console.log(symbol1 === symbol2); // false (unique!)
+                console.log(symbol3 === symbol4); // false (still unique!)
+                console.log(typeof symbol1);    // "symbol"
+            </div>
+
+            <div class="key-point">
+                <strong>🎯 Key Point:</strong> Every Symbol is unique, even if they have the same description!
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🎮 Interactive Symbol Demos</h3>
+            <div>
+                <button class="demo-button" onclick="demoBasicSymbols()">Basic Symbols</button>
+                <button class="demo-button" onclick="demoSymbolAsKeys()">Symbol as Object Keys</button>
+                <button class="demo-button" onclick="demoPrivateProperties()">Private Properties</button>
+                <button class="demo-button" onclick="demoGlobalSymbols()">Global Symbols</button>
+                <button class="demo-button" onclick="clearOutput()">Clear Output</button>
+            </div>
+            <div class="demo-output" id="demo-output">
+                Click any button above to see Symbol examples in action!
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('use-cases')">Use Cases</button>
+            <button class="tab" onclick="showTab('properties')">Properties & Methods</button>
+            <button class="tab" onclick="showTab('comparison')">vs Other Types</button>
+        </div>
+
+        <div class="tab-content">
+            <div id="use-cases" class="tab-section">
+                <h3>🎯 Real-World Use Cases</h3>
+                
+                <div class="use-case">
+                    <h4>1. Private Object Properties</h4>
+                    <div class="code-block">
+                        <div class="code-title">Private Properties with Symbols</div>
+                        const _privateData = Symbol('private');
+
+                        class User {
+                            constructor(name, age) {
+                                this.name = name;
+                                this[_privateData] = { age, password: 'secret123' };
+                            }
+                            
+                            getAge() {
+                                return this[_privateData].age;
+                            }
+                        }
+
+                        const user = new User('John', 25);
+                        console.log(user.name);           // 'John' (public)
+                        console.log(user[_privateData]);  // { age: 25, password: 'secret123' }
+                        console.log(Object.keys(user));   // ['name'] (private data hidden!)
+                    </div>
+                </div>
+
+                <div class="use-case">
+                    <h4>2. Avoiding Property Name Conflicts</h4>
+                    <div class="code-block">
+                        <div class="code-title">Library Integration</div>
+                        // Library A uses symbols to avoid conflicts
+                        const LibraryA_ID = Symbol('LibraryA_ID');
+                        const LibraryB_ID = Symbol('LibraryB_ID');
+
+                        const myObject = {
+                            name: 'Test Object',
+                            [LibraryA_ID]: 'A123',
+                            [LibraryB_ID]: 'B456'
+                        };
+
+                        // No conflicts even if both libraries use 'ID'
+                        console.log(myObject[LibraryA_ID]); // 'A123'
+                        console.log(myObject[LibraryB_ID]); // 'B456'
+                    </div>
+                </div>
+
+                <div class="use-case">
+                    <h4>3. Well-Known Symbols (Built-in)</h4>
+                    <div class="code-block">
+                        <div class="code-title">Custom Iterator</div>
+                        const myIterable = {
+                            data: ['a', 'b', 'c'],
+                            [Symbol.iterator]() {
+                                let index = 0;
+                                return {
+                                    next: () => {
+                                        if (index < this.data.length) {
+                                            return { value: this.data[index++], done: false };
+                                        }
+                                        return { done: true };
+                                    }
+                                };
+                            }
+                        };
+
+                        // Now it's iterable!
+                        for (const item of myIterable) {
+                            console.log(item); // 'a', 'b', 'c'
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div id="properties" class="tab-section hidden">
+                <h3>🔧 Symbol Properties & Methods</h3>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Method/Property</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>Symbol(description)</code></td>
+                            <td>Creates a new symbol with optional description</td>
+                            <td><code>Symbol('mySymbol')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>Symbol.for(key)</code></td>
+                            <td>Gets/creates a global symbol</td>
+                            <td><code>Symbol.for('global')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>Symbol.keyFor(symbol)</code></td>
+                            <td>Gets the key of a global symbol</td>
+                            <td><code>Symbol.keyFor(sym)</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>symbol.description</code></td>
+                            <td>Gets the description of a symbol</td>
+                            <td><code>sym.description</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>symbol.toString()</code></td>
+                            <td>Returns string representation</td>
+                            <td><code>'Symbol(desc)'</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block">
+                    <div class="code-title">Symbol Methods Example</div>
+                    // Creating symbols
+                    const localSym = Symbol('local');
+                    const globalSym = Symbol.for('global');
+
+                    // Properties
+                    console.log(localSym.description);    // 'local'
+                    console.log(localSym.toString());     // 'Symbol(local)'
+
+                    // Global symbol registry
+                    console.log(Symbol.for('global') === globalSym); // true
+                    console.log(Symbol.keyFor(globalSym));           // 'global'
+                    console.log(Symbol.keyFor(localSym));            // undefined
+                </div>
+            </div>
+
+            <div id="comparison" class="tab-section hidden">
+                <h3>⚖️ Symbol vs Other Data Types</h3>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Symbol</th>
+                            <th>String</th>
+                            <th>Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Uniqueness</strong></td>
+                            <td>✅ Always unique</td>
+                            <td>❌ Can be identical</td>
+                            <td>❌ Can be identical</td>
+                        </tr>
+                        <tr>
+                            <td><strong>As Object Key</strong></td>
+                            <td>✅ Yes, hidden from enumeration</td>
+                            <td>✅ Yes, visible</td>
+                            <td>✅ Yes, converted to string</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JSON.stringify</strong></td>
+                            <td>❌ Ignored</td>
+                            <td>✅ Included</td>
+                            <td>✅ Included</td>
+                        </tr>
+                        <tr>
+                            <td><strong>for...in loop</strong></td>
+                            <td>❌ Not enumerated</td>
+                            <td>✅ Enumerated</td>
+                            <td>✅ Enumerated</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Object.keys()</strong></td>
+                            <td>❌ Not included</td>
+                            <td>✅ Included</td>
+                            <td>✅ Included</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block">
+                    <div class="code-title">Comparison Example</div>
+                    const sym = Symbol('test');
+                    const obj = {
+                        name: 'John',
+                        age: 30,
+                        [sym]: 'hidden value'
+                    };
+
+                    console.log(Object.keys(obj));           // ['name', 'age']
+                    console.log(Object.getOwnPropertySymbols(obj)); // [Symbol(test)]
+                    console.log(JSON.stringify(obj));        // {"name":"John","age":30}
+                    
+                    // Symbol property is there, but hidden!
+                    console.log(obj[sym]);                   // 'hidden value'
+                </div>
+            </div>
+        </div>
+
+        <div class="warning">
+            <h4>⚠️ Important Notes</h4>
+            <ul>
+                <li><strong>Cannot use `new`:</strong> <code>new Symbol()</code> throws TypeError</li>
+                <li><strong>Not coercible:</strong> Cannot be converted to string/number automatically</li>
+                <li><strong>Property enumeration:</strong> Symbol properties are not enumerated by default</li>
+                <li><strong>JSON serialization:</strong> Symbol properties are ignored in JSON.stringify()</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>🌟 Well-Known Symbols</h3>
+            <p>JavaScript provides several built-in symbols for customizing object behavior:</p>
+            
+            <div class="code-block">
+                <div class="code-title">Common Well-Known Symbols</div>
+                // Symbol.iterator - Makes object iterable
+                Symbol.iterator
+
+                // Symbol.toStringTag - Customizes Object.prototype.toString()
+                Symbol.toStringTag
+
+                // Symbol.hasInstance - Customizes instanceof behavior
+                Symbol.hasInstance
+
+                // Symbol.toPrimitive - Customizes type conversion
+                Symbol.toPrimitive
+
+                // And many more...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function demoBasicSymbols() {
+            const output = document.getElementById('demo-output');
+            const code = `
+// Creating symbols
+const symbol1 = Symbol();
+const symbol2 = Symbol();
+const symbol3 = Symbol('description');
+const symbol4 = Symbol('description');
+
+console.log('symbol1:', symbol1);
+console.log('symbol3:', symbol3);
+console.log('symbol1 === symbol2:', symbol1 === symbol2);
+console.log('symbol3 === symbol4:', symbol3 === symbol4);
+console.log('typeof symbol1:', typeof symbol1);
+            `;
+            
+            output.innerHTML = `<div class="output-label">🔧 Basic Symbols Demo:</div>`;
+            
+            try {
+                const symbol1 = Symbol();
+                const symbol2 = Symbol();
+                const symbol3 = Symbol('description');
+                const symbol4 = Symbol('description');
+                
+                output.innerHTML += `<div>symbol1: ${symbol1.toString()}</div>`;
+                output.innerHTML += `<div>symbol3: ${symbol3.toString()}</div>`;
+                output.innerHTML += `<div>symbol1 === symbol2: ${symbol1 === symbol2}</div>`;
+                output.innerHTML += `<div>symbol3 === symbol4: ${symbol3 === symbol4}</div>`;
+                output.innerHTML += `<div>typeof symbol1: ${typeof symbol1}</div>`;
+                output.innerHTML += `<div style="color: #28a745; margin-top: 10px;">✅ Every Symbol is unique!</div>`;
+            } catch (error) {
+                output.innerHTML += `<div style="color: #dc3545;">Error: ${error.message}</div>`;
+            }
+        }
+
+        function demoSymbolAsKeys() {
+            const output = document.getElementById('demo-output');
+            output.innerHTML = `<div class="output-label">🔑 Symbol as Object Keys:</div>`;
+            
+            try {
+                const id = Symbol('id');
+                const user = {
+                    name: 'Alice',
+                    age: 28,
+                    [id]: 'secret-123'
+                };
+                
+                output.innerHTML += `<div>user.name: ${user.name}</div>`;
+                output.innerHTML += `<div>user[id]: ${user[id]}</div>`;
+                output.innerHTML += `<div>Object.keys(user): [${Object.keys(user).join(', ')}]</div>`;
+                output.innerHTML += `<div>Object.getOwnPropertySymbols(user): [${Object.getOwnPropertySymbols(user).map(s => s.toString()).join(', ')}]</div>`;
+                output.innerHTML += `<div style="color: #28a745; margin-top: 10px;">✅ Symbol properties are hidden from normal enumeration!</div>`;
+            } catch (error) {
+                output.innerHTML += `<div style="color: #dc3545;">Error: ${error.message}</div>`;
+            }
+        }
+
+        function demoPrivateProperties() {
+            const output = document.getElementById('demo-output');
+            output.innerHTML = `<div class="output-label">🔒 Private Properties with Symbols:</div>`;
+            
+            try {
+                const _private = Symbol('private');
+                
+                function createUser(name, secret) {
+                    return {
+                        name: name,
+                        [_private]: secret,
+                        getSecret() {
+                            return this[_private];
+                        }
+                    };
+                }
+                
+                const user = createUser('Bob', 'my-secret-data');
+                
+                output.innerHTML += `<div>user.name: ${user.name}</div>`;
+                output.innerHTML += `<div>user.getSecret(): ${user.getSecret()}</div>`;
+                output.innerHTML += `<div>Object.keys(user): [${Object.keys(user).join(', ')}]</div>`;
+                output.innerHTML += `<div>for...in loop only sees: [${Object.keys(user).join(', ')}]</div>`;
+                output.innerHTML += `<div style="color: #28a745; margin-top: 10px;">✅ Private data is hidden but accessible through methods!</div>`;
+            } catch (error) {
+                output.innerHTML += `<div style="color: #dc3545;">Error: ${error.message}</div>`;
+            }
+        }
+
+        function demoGlobalSymbols() {
+            const output = document.getElementById('demo-output');
+            output.innerHTML = `<div class="output-label">🌍 Global Symbol Registry:</div>`;
+            
+            try {
+                const sym1 = Symbol.for('global-id');
+                const sym2 = Symbol.for('global-id');
+                const localSym = Symbol('local-id');
+                
+                output.innerHTML += `<div>Symbol.for('global-id') === Symbol.for('global-id'): ${sym1 === sym2}</div>`;
+                output.innerHTML += `<div>Symbol.keyFor(globalSymbol): ${Symbol.keyFor(sym1)}</div>`;
+                output.innerHTML += `<div>Symbol.keyFor(localSymbol): ${Symbol.keyFor(localSym)}</div>`;
+                output.innerHTML += `<div>sym1.description: ${sym1.description}</div>`;
+                output.innerHTML += `<div style="color: #28a745; margin-top: 10px;">✅ Global symbols are shared across the entire application!</div>`;
+            } catch (error) {
+                output.innerHTML += `<div style="color: #dc3545;">Error: ${error.message}</div>`;
+            }
+        }
+
+        function clearOutput() {
+            document.getElementById('demo-output').innerHTML = 'Click any button above to see Symbol examples in action!';
+        }
+
+        function showTab(tabName) {
+            // Hide all tab sections
+            const sections = document.querySelectorAll('.tab-section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Initialize with basic demo
+        window.onload = function() {
+            demoBasicSymbols();
+        };
+    </script>
+</body>
+</html>
